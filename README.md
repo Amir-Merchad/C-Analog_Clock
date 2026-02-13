@@ -12,9 +12,6 @@ native environment.
 
 ![Project Screenshot](screenshots/demo.png)
 
-> Replace `screenshots/demo.png` with an actual screenshot or GIF of
-> your running clock.
-
 ------------------------------------------------------------------------
 
 ## 🚀 Features
@@ -97,8 +94,8 @@ Expected structure:
 ### 🏗️ Build
 
 ``` bash
-git clone https://github.com/Amir-Merchad/raylib-analog-clock.git
-cd raylib-analog-clock
+git clone https://github.com/Amir-Merchad/C-Analog_clock.git
+cd C-Analog_Clock
 
 mkdir build
 cd build
@@ -123,18 +120,8 @@ cmake --build . --config Release
 ------------------------------------------------------------------------
 
 ## 📦 Distribution
-
-If statically linked:
-
     Clock.exe
     resources/
-
-If dynamically linked:
-
-    Clock.exe
-    raylib.dll
-    resources/
-
 ------------------------------------------------------------------------
 
 ## 🔮 Future Improvements
