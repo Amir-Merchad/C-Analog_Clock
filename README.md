@@ -1,50 +1,161 @@
-# Raylib Analog Clock 🕰️
+# 🕰️ Raylib Analog Clock
 
-A real-time analog clock simulation built from scratch using **C** and the **Raylib** library. This project explores procedural 2D rendering, trigonometric time calculation, and audio handling in a low-level environment.
+A real-time analog clock built in **C** using the **raylib** graphics
+library.\
+This project demonstrates procedural 2D rendering, trigonometric
+calculations, system time integration, and basic audio playback in a
+native environment.
+
+------------------------------------------------------------------------
+
+## 📸 Preview
 
 ![Project Screenshot](screenshots/demo.png)
-*(Note: Please replace `screenshots/demo.png` with an actual screenshot of your running clock)*
+
+> Replace `screenshots/demo.png` with an actual screenshot or GIF of
+> your running clock.
+
+------------------------------------------------------------------------
 
 ## 🚀 Features
 
-* **Real-time Synchronization:** Fetches system time using `time.h` and `struct tm`.
-* **Procedural Rendering:** The clock face, ticks, and numbers are drawn mathematically rather than using static assets.
-* **Audio Feedback:** Includes a synchronized ticking sound effect for every second passed.
-* **Trigonometric Logic:** Hand movements and tick placement are calculated using polar-to-cartesian coordinate conversion.
-* **Interactivity:** Clickable link integration to GitHub profile.
+-   **Real-time synchronization** using `time.h` and `struct tm`
+-   **Procedural rendering** of clock face, tick marks, and numbers
+-   **Accurate trigonometric calculations** for hand positioning
+-   **Synchronized ticking sound** (plays once per second)
+-   **Interactive GitHub link** inside the application
+-   **Native Windows GUI build** (no console window)
+
+------------------------------------------------------------------------
 
 ## 🛠️ Tech Stack
 
-* **Language:** C (C11 Standard)
-* **Library:** [Raylib 5.0](https://www.raylib.com/) (Graphics, Audio, Input)
-* **Build System:** CMake 3.21+
-* **IDE:** CLion / VS Code
+-   **Language:** C (C11)
+-   **Library:** raylib 5.x
+-   **Build System:** CMake (3.21+)
+-   **Compiler:** MinGW-w64 (x86_64)
 
-## 🧮 How It Works (The Math)
+------------------------------------------------------------------------
 
-The core logic involves converting the time (Hours, Minutes, Seconds) into angles, and then converting those angles into 2D screen coordinates $(x, y)$.
+## 🧮 How It Works
 
-### 1. Angle Calculation
-The angle $\theta$ is calculated based on the current time unit. For example, the seconds hand moves $\frac{2\pi}{60}$ radians per second.
+### 1️⃣ Angle Calculation
 
-```c
-// -PI/2 shifts the starting point to the top (12 o'clock)
+Each hand is converted from time units into radians.
+
+``` c
+// -PI/2 shifts 0 radians to 12 o'clock
 float secondAngle = local->tm_sec * (2 * PI / 60) - PI / 2;
-2. Polar to Cartesian ConversionTo draw the hands and tick marks, we convert the angle and radius into coordinate points:$$x = x_{center} + r \cdot \cos(\theta)$$$$y = y_{center} + r \cdot \sin(\theta)$$📦 Installation & BuildPrerequisitesA C Compiler (GCC, MinGW, or MSVC)CMakeRaylib installed on your system (Default path: C:/raylib)ConfigurationThe CMakeLists.txt currently looks for Raylib at C:/raylib. If your installation is different, please update the set(RAYLIB_PATH ...) line in CMakeLists.txt.Building with CMakeBash# Clone the repository
-git clone [https://github.com/Amir-Merchad/raylib-analog-clock.git](https://github.com/Amir-Merchad/raylib-analog-clock.git)
+```
 
-# Go into the directory
+### 2️⃣ Polar → Cartesian Conversion
+
+To draw lines from the center of the clock:
+
+    x = centerX + radius * cos(theta)
+    y = centerY + radius * sin(theta)
+
+This is used for: - Hour markers - Clock hands - Number placement
+
+------------------------------------------------------------------------
+
+## 🔊 Audio System
+
+-   `InitAudioDevice()` initializes raylib audio
+-   `LoadSound()` loads the tick sample once
+-   Sound plays only when `tm_sec` changes
+-   `UnloadSound()` properly frees memory on exit
+
+------------------------------------------------------------------------
+
+## 📦 Build Instructions
+
+### 🔧 Requirements
+
+-   MinGW-w64 (64-bit)
+-   CMake ≥ 3.21
+-   raylib MinGW 64-bit build
+
+### 📁 Raylib Setup
+
+Download raylib from:
+
+https://github.com/raysan5/raylib/releases
+
+Extract to:
+
+    C:/raylib
+
+Expected structure:
+
+    C:/raylib
+    ├── include
+    └── lib
+
+------------------------------------------------------------------------
+
+### 🏗️ Build
+
+``` bash
+git clone https://github.com/Amir-Merchad/raylib-analog-clock.git
 cd raylib-analog-clock
 
-# Create build directory
 mkdir build
 cd build
 
-# Configure and Build
 cmake ..
-cmake --build .
-Resource FilesEnsure the resources folder is in the same directory as your executable. It must contain:clock_tick.wav🔮 Future ImprovementsAdd a toggle for Dark/Light mode.Implement a stopwatch or timer feature.Add a smooth interpolation (Lerp) for the second hand so it sweeps instead of ticks.👨‍💻 AuthorAmir MerchadGitHub
-### 🛑 Before you push to GitHub:
-1.  **Create a folder** named `screenshots` in your project directory.
-2.  **Take a screenshot** of your running clock, name it `demo.png`, and put it in that folder.
-3.  **Upload the `resources` folder** containing your `.wav` file, or the code will crash for anyon
+cmake --build . --config Release
+```
+
+------------------------------------------------------------------------
+
+## 📂 Project Structure
+
+    .
+    ├── main.c
+    ├── CMakeLists.txt
+    ├── resources/
+    │   └── clock_tick.wav
+    ├── screenshots/
+    │   └── demo.png
+    └── README.md
+
+------------------------------------------------------------------------
+
+## 📦 Distribution
+
+If statically linked:
+
+    Clock.exe
+    resources/
+
+If dynamically linked:
+
+    Clock.exe
+    raylib.dll
+    resources/
+
+------------------------------------------------------------------------
+
+## 🔮 Future Improvements
+
+-   Dark / Light mode toggle
+-   Smooth sweeping second hand
+-   Adjustable tick volume
+-   Timezone selection
+-   Cross-platform support (Linux/macOS)
+
+------------------------------------------------------------------------
+
+## 👨‍💻 Author
+
+**Amir Merchad**\
+Computer Science Student
+
+GitHub: https://github.com/Amir-Merchad
+
+------------------------------------------------------------------------
+
+## 📜 License
+
+This project is licensed under the MIT License.
