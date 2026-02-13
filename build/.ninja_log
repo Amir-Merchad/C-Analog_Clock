@@ -1,0 +1,6 @@
+# ninja log v6
+169	420	7927250139045178	Clock.exe	f39f0e9f54302f1b
+4	166	7927250137395134	CMakeFiles/Clock.dir/main.c.obj	b1b55cb377451a2d
+3	119	7927254541446732	build.ninja	9396ed6afcae7ccd
+3	119	7927254541446732	C:/Users/Amir Merchad/CLionProjects/untitled5/build/cmake_install.cmake	9396ed6afcae7ccd
+2	129	7927254541656909	Clock.exe	4af9539bc852b58f
